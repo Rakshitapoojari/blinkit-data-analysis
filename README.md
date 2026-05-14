@@ -1,111 +1,134 @@
-## 🚀 BlinkIT Grocery Sales Analysis using MySQL
+# 🛒 BlinkIT Grocery Sales Analysis (MySQL Project)
 
-# 📌 Project Overview
-This project analyzes BlinkIT grocery sales data using MySQL 8.0 to generate meaningful business insights.
+## 📌 Project Overview
 
-# The dataset was cleaned, transformed, and analyzed using SQL to understand:
-Sales performance
-Outlet performance
-Product category trends
-Customer ratings
-Inventory behavior
+This project focuses on analyzing **BlinkIT grocery sales data** using **MySQL** to extract meaningful business insights.
 
-# 🎯 Goal
-To demonstrate strong SQL skills in:
-Data cleaning
-Data aggregation
-KPI calculation
-Business insight generation
+The dataset was cleaned, transformed, and analyzed to understand:
 
-# 🛠️ Tools & Technologies
-MySQL 8.0
+* Sales performance trends
+* Outlet performance comparison
+* Product category analysis
+* Customer rating behavior
+* Inventory and visibility patterns
 
-# 📂 Dataset Information
-Columns used in the dataset:
-Item Fat Content
-Item Identifier
-Item Type
-Outlet Establishment Year
-Outlet Identifier
-Outlet Location Type
-Outlet Size
-Outlet Type
-Item Visibility
-Item Weight
-Total Sales
-Rating
+The goal of this project is to demonstrate **real-world SQL analytics skills** for business decision-making.
 
-# 🗄️ Database Setup
-Create Database
-CREATE DATABASE blinkit;
-USE blinkit;
+---
 
-# Table Structure
-CREATE TABLE blinkit_data (
-    Item_Fat_Content VARCHAR(20),
-    Item_Identifier VARCHAR(20),
-    Item_Type VARCHAR(50),
-    Outlet_Establishment_Year INT,
-    Outlet_Identifier VARCHAR(20),
-    Outlet_Location_Type VARCHAR(50),
-    Outlet_Size VARCHAR(20),
-    Outlet_Type VARCHAR(50),
-    Item_Visibility DECIMAL(10,9),
-    Item_Weight DECIMAL(10,3),
-    Total_Sales DECIMAL(10,4),
-    Rating DECIMAL(3,2)
-);
+## 🎯 Key Objectives
 
-# 🧹 Data Cleaning
-Standardized inconsistent values in fat content:
+* Clean and standardize raw dataset using SQL
+* Perform exploratory data analysis using aggregations
+* Build KPIs for business performance tracking
+* Identify high-performing outlets and product categories
+* Generate actionable business insights
+
+---
+
+## 🛠️ Tools & Technologies Used
+
+* MySQL 8.0
+* SQL (Data Cleaning + Analysis)
+
+---
+
+## 📂 Dataset Information
+
+The dataset contains grocery sales information including:
+
+* Item Fat Content
+* Item Identifier
+* Item Type
+* Outlet Type
+* Outlet Size
+* Outlet Location Type
+* Item Weight
+* Item Visibility
+* Total Sales
+* Customer Rating
+
+---
+
+## 🧹 Data Cleaning Process
+
+Key cleaning steps performed:
+
+* Standardized inconsistent values in `Item_Fat_Content`
+* Handled missing values using NULL conversion
+* Cleaned numeric fields during data import
+
+```sql
 UPDATE blinkit_data
 SET Item_Fat_Content =
 CASE
-    WHEN Item_Fat_Content IN ('LF', 'low fat') THEN 'Low Fat'
-    WHEN Item_Fat_Content = 'reg' THEN 'Regular'
+    WHEN Item_Fat_Content IN ('LF', 'low fat')
+    THEN 'Low Fat'
+    WHEN Item_Fat_Content = 'reg'
+    THEN 'Regular'
     ELSE Item_Fat_Content
 END;
+```
+
+---
 
 ## 📊 Key Business KPIs
 
-# 💰 Total Sales
-SELECT CONCAT(CAST(SUM(Total_Sales)/1000000 AS DECIMAL(10,2)), ' Million') 
-AS Total_Sales_Millions
-FROM blinkit_data;
+### 💰 Total Sales
 
-# 📦 Total Items
-SELECT COUNT(*) AS No_of_Items FROM blinkit_data;
+* Overall revenue generated from all items
 
-# 📈 Average Sales
-SELECT CAST(AVG(Total_Sales) AS DECIMAL(10,0)) AS Avg_Sales
-FROM blinkit_data;
+### 📦 Total Items Sold
 
-# ⭐ Average Rating
-SELECT CAST(AVG(Rating) AS DECIMAL(10,0)) AS Avg_Rating
-FROM blinkit_data;
+* Total number of transactions/items in dataset
 
-# 📊 Business Insights
-# 🧈 Sales by Item Fat Content
-Compared Low Fat vs Regular products
-Measured sales, rating, and item count
+### 📈 Average Sales
 
-# 🏪 Outlet Performance
-Sales by outlet type
-Sales by outlet size
-Sales by location type
+* Average revenue per transaction
 
-# 🥫 Product Analysis
-Top-performing item categories
-Sales contribution by item type
+### ⭐ Average Rating
 
-# 🏆 Key Insights
-Certain outlet types contribute significantly higher revenue
-Medium/Large outlets perform better in total sales
-Specific item categories dominate revenue contribution
-Customer ratings help identify high-performing products
+* Customer satisfaction indicator
 
-# 📊 Sample Analysis Queries
-Sales by Outlet Type
+---
+
+## 🏪 Business Insights Derived
+
+### 1. Outlet Performance Analysis
+
+* Compared sales across outlet types and sizes
+* Identified high-performing outlet categories
+
+### 2. Product Category Analysis
+
+* Found top-performing item types based on revenue
+* Identified low-performing categories
+
+### 3. Fat Content Analysis
+
+* Compared Low Fat vs Regular product sales behavior
+
+### 4. Location-based Insights
+
+* Evaluated performance across different outlet locations
+
+---
+
+## 🧠 Key Insights
+
+* Certain outlet types contribute significantly higher revenue
+* Medium/Large outlets perform better in overall sales
+* Specific product categories dominate total revenue
+* Customer ratings help identify high-demand products
+* Outlet location plays a key role in performance differences
+
+---
+
+## 📊 Sample SQL Analysis
+
+Example: Sales by Outlet Type
+
+```sql
 SELECT Outlet_Type,
 SUM(Total_Sales) AS Total_Sales,
 AVG(Total_Sales) AS Avg_Sales,
@@ -114,21 +137,31 @@ AVG(Rating) AS Avg_Rating
 FROM blinkit_data
 GROUP BY Outlet_Type
 ORDER BY Total_Sales DESC;
+```
 
-# 🚀 What This Project Demonstrates
-✔ SQL data cleaning
-✔ Aggregation & grouping
-✔ Business KPI creation
-✔ Analytical thinking
-✔ Real-world retail analysis
+---
 
-# 📌 Future Improvements
-Power BI dashboard visualization
-Python-based advanced analytics
-Predictive sales modeling
-Automated reporting system
+## 🚀 What This Project Demonstrates
 
-# 👩‍💻 Author
-Rakshita Poojari
+✔ SQL Data Cleaning
+✔ Data Aggregation & Grouping
+✔ Business KPI Development
+✔ Analytical Thinking
+✔ Real-world Retail Data Analysis
+
+---
+
+## 📈 Future Improvements
+
+* Build Power BI dashboard for visualization
+* Add Python-based EDA layer
+* Perform predictive sales analysis
+* Automate reporting pipeline
+
+---
+
+## 👩‍💻 Author
+
+**Rakshita Poojari**
 Aspiring Data Analyst
-Skills: SQL | Excel | Data Visualization 
+Skills: SQL | Excel | Power BI | Data Visualization
